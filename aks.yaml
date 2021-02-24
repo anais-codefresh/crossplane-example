@@ -1,0 +1,21 @@
+apiVersion: azure.crossplane.io/v1alpha3
+kind: ResourceGroup
+metadata:
+  name: anais-resource
+spec:
+  location: eastus
+
+---
+
+apiVersion: compute.azure.crossplane.io/v1alpha3
+kind: AKSCluster
+metadata:
+  name: anais-crossplane-demo
+spec:
+  location: eastus
+  version: "1.19.7"
+  nodeVMSize: Standard_D2_v2
+  resourceGroupNameRef:
+    name: anais-resource
+  dnsNamePrefix: dt
+  nodeCount: 2
